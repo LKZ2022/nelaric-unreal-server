@@ -6,7 +6,7 @@ English | [简体中文](CONTRIBUTING.zh-CN.md)
 
 Thank you for helping build Nelaric Unreal Server. Reports, design feedback, documentation improvements, and code contributions are welcome in English or Chinese.
 
-The repository is still in its planning stage. There is no usable Unreal Engine plugin or compilable UE project yet. Please describe a proposed capability as a proposal, rather than assuming its API or implementation already exists.
+The repository contains a loadable plugin scaffold, but no server services or public API yet. The local validation project under `Development/` is excluded from Git. Please describe a proposed capability as a proposal, rather than assuming its API or implementation already exists.
 
 ## Before opening an issue
 

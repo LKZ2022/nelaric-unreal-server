@@ -6,7 +6,9 @@
 
 面向 Unreal Engine 的独立服务器框架，不绑定具体玩法或服务提供商。
 
-本仓库仍处于初期规划阶段。项目架构、支持的 Unreal Engine 版本及安装说明会随着开发逐步完善。
+仓库已在 `Unreal-Plugins/NelaricServer/` 建立 UE 5.6 插件骨架。`NelaricCore` 模块能够加载，但尚未提供服务器服务或公开 API。`Development/` 下的本地验证工程不纳入 Git。
+
+模块当前的职责和依赖见 [NelaricCore 模块说明](Docs/Modules/NelaricCore.zh-CN.md)。
 
 ## 参与贡献
 
@@ -16,7 +18,7 @@
 
 ## API 文档
 
-[API 文档网站](https://nelaric.github.io/nelaric-unreal-server/)目前发布编码规范；首批模块完成后，也会收录公开 C++ API。
+[API 文档网站](https://nelaric.github.io/nelaric-unreal-server/)目前发布编码规范；加入公开头文件后，也会收录公开 C++ API。
 
 ## Star 历史
 
