@@ -14,7 +14,7 @@ See the [NelaricCore module description](Docs/Modules/NelaricCore.md) for its cu
 
 All developers contributing to this project must follow both [Epic Games' Unreal Engine Coding Standard](https://dev.epicgames.com/documentation/unreal-engine/epic-cplusplus-coding-standard-for-unreal-engine) and the [project coding standards](Docs/CodingStandards/). The project standards define our module boundaries, API contracts, review rules, and required automated checks.
 
-See the [contribution guide](CONTRIBUTING.md) for issue and pull request guidance.
+See the [contribution guide](CONTRIBUTING.md) for issue and pull request guidance, and the [development and CI workflow](Docs/DevelopmentWorkflow.md) for automated checks and the Linux plugin build.
 
 ## API Documentation
 
@@ -29,3 +29,7 @@ The [API documentation site](https://nelaric.github.io/nelaric-unreal-server/) p
     <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Nelaric/nelaric-unreal-server&type=date&legend=top-left" />
   </picture>
 </a>
+
+## Thanks
+
+Thanks to everyone contributing to Nelaric Unreal Server, to Epic Games for Unreal Engine, and to CircleCI for the Linux plugin build service.
