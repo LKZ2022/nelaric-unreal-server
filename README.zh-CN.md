@@ -14,7 +14,7 @@
 
 所有参与本项目的开发者都必须遵守 [Epic Games 的 Unreal Engine C++ 编码规范](https://dev.epicgames.com/documentation/unreal-engine/epic-cplusplus-coding-standard-for-unreal-engine) 和[项目编码规范](Docs/CodingStandards/README.zh-CN.md)。项目规范定义了模块边界、API 契约、审查规则和必要的自动检查。
 
-关于 Issue 和 Pull Request 的提交方式，请阅读[贡献指南](CONTRIBUTING.zh-CN.md)。
+关于 Issue 和 Pull Request 的提交方式，请阅读[贡献指南](CONTRIBUTING.zh-CN.md)；自动检查和 Linux 插件编译见[开发与 CI 流程](Docs/DevelopmentWorkflow.zh-CN.md)。
 
 ## API 文档
 
@@ -29,3 +29,7 @@
     <img alt="Star 历史图表" src="https://api.star-history.com/chart?repos=Nelaric/nelaric-unreal-server&type=date&legend=top-left" />
   </picture>
 </a>
+
+## 致谢
+
+感谢所有参与 Nelaric Unreal Server 的贡献者，感谢 Epic Games 提供 Unreal Engine，也感谢 CircleCI 提供 Linux 插件编译服务。
