@@ -6,7 +6,9 @@ English | [简体中文](README.zh-CN.md)
 
 A gameplay-agnostic, provider-agnostic dedicated server framework for Unreal Engine.
 
-This repository is in its initial planning stage. Architecture, supported Unreal Engine versions, and setup instructions will be documented as the project develops.
+This repository has a UE 5.6 plugin scaffold at `Unreal-Plugins/NelaricServer/`. Its `NelaricCore` module loads but does not yet provide server services or a public API. The local validation project under `Development/` is excluded from Git.
+
+See the [NelaricCore module description](Docs/Modules/NelaricCore.md) for its current responsibility and dependencies.
 
 ## Contributing
 
@@ -16,7 +18,7 @@ See the [contribution guide](CONTRIBUTING.md) for issue and pull request guidanc
 
 ## API Documentation
 
-The [API documentation site](https://nelaric.github.io/nelaric-unreal-server/) publishes the coding standards now and will include the public C++ API when the first modules are added.
+The [API documentation site](https://nelaric.github.io/nelaric-unreal-server/) publishes the coding standards now and will include the public C++ API when public headers are added.
 
 ## Star History
 

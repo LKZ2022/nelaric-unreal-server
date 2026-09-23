@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "NelaricServer",
+	"Description": "Gameplay-agnostic dedicated server framework for Unreal Engine.",
+	"Category": "Other",
+	"CreatedBy": "Nelaric",
+	"CreatedByURL": "",
+	"DocsURL": "https://nelaric.github.io/nelaric-unreal-server",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "NelaricCore",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

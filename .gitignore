@@ -4,6 +4,9 @@ DerivedDataCache/
 Intermediate/
 Saved/
 
+# Local Unreal development project
+/Development/
+
 # Generated API documentation and local tooling outputs
 /.tools/
 /.csharpier/
