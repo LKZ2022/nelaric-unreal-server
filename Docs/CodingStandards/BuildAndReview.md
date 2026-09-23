@@ -35,7 +35,7 @@ Use the versions fixed by `.github/workflows/quality.yml` and `.config/dotnet-to
 3. `python Scripts/check_public_docs.py` checks that every public header has a file comment.
 4. `python Scripts/run_doxygen.py` builds the API site and fails on Doxygen warnings. Install the pinned Doxygen release first.
 
-The format, documentation, and PR naming checks are required pull request checks. They do not rewrite a PR. CircleCI compiles the plugin after changes reach `main`; this is not a required pull request check. No clang-tidy or test coverage gate is required now.
+The format, documentation, PR naming, and CircleCI public quality checks are required pull request checks. They do not rewrite a PR. CircleCI compiles the plugin after changes reach `main`; the Unreal build is not a required pull request check. No clang-tidy or test coverage gate is required now.
 
 ## Commit and branch names
 

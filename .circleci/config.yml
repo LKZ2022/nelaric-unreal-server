@@ -6,13 +6,7 @@ jobs:
     docker:
       - image: cimg/python:3.12
     steps:
-      - run:
-          name: Fetch public pull request commit
-          command: |
-            set -euo pipefail
-            git clone --no-checkout https://github.com/Nelaric/nelaric-unreal-server.git .
-            git fetch --no-tags --depth=1 origin "$CIRCLE_SHA1"
-            git checkout --detach "$CIRCLE_SHA1"
+      - checkout
       - run:
           name: Check text conventions
           command: python Scripts/check_text.py
@@ -54,7 +48,7 @@ jobs:
 
 workflows:
   public_pr_quality:
-    when: pipeline.trigger.type == "github_oauth"
+    when: pipeline.definition.id == "68c5c463-f50a-5fe1-b2c5-52d63b91dfc1"
     jobs:
       - public_quality:
           filters:
@@ -62,7 +56,7 @@ workflows:
               ignore: main
 
   linux_plugin_build:
-    when: pipeline.trigger.type == "github_app"
+    when: pipeline.definition.id == "ac7bbb47-aaa9-4252-97ca-466912f1782d"
     jobs:
       - build_plugin_linux:
           filters:

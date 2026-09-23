@@ -35,7 +35,7 @@
 3. `python Scripts/check_public_docs.py` 检查每个公开头文件是否有文件注释。
 4. `python Scripts/run_doxygen.py` 构建 API 网站，并在 Doxygen 警告出现时失败。运行前需安装锁定版本的 Doxygen。
 
-格式、文档和 PR 命名检查是必需的 PR 检查，CI 不会自动修改 PR。CircleCI 会在改动进入 `main` 后编译插件，但不是必需的 PR 检查。现阶段不要求 clang-tidy 或测试覆盖率门槛。
+格式、文档、PR 命名和 CircleCI 公开质量检查是必需的 PR 检查，CI 不会自动修改 PR。CircleCI 会在改动进入 `main` 后编译插件；Unreal 编译不是必需的 PR 检查。现阶段不要求 clang-tidy 或测试覆盖率门槛。
 
 ## 提交与分支命名
 

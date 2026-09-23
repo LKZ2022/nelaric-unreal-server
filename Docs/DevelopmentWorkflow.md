@@ -7,10 +7,16 @@ English | [简体中文](DevelopmentWorkflow.zh-CN.md)
 ## From change to `main`
 
 1. Make a focused change on a branch or fork and run the relevant [local checks](CodingStandards/BuildAndReview.md#local-checks).
-2. Open a pull request to `main`. GitHub Actions runs the **Quality** workflow: PR and commit naming, format and text conventions, and API documentation. The repository requires these checks and a review before merging.
-3. After a change reaches `main`, GitHub Actions reruns the format and API documentation checks and the **API Pages** workflow publishes the documentation site. CircleCI runs the Linux plugin build. The CircleCI build runs after merge; it is not a required pull request check.
+2. Open a pull request to `main`. GitHub Actions runs the **Quality** workflow: PR and commit naming, format and text conventions, and API documentation. The CircleCI GitHub OAuth pipeline runs the secretless `public_quality` job for fork pull requests. The repository requires these checks and a review before merging.
+3. After a change reaches `main`, GitHub Actions reruns the format and API documentation checks and the **API Pages** workflow publishes the documentation site. The separate CircleCI GitHub App pipeline runs the Linux plugin build. The Unreal compilation runs after merge; it is not a required pull request check.
 
 See the [contribution guide](../CONTRIBUTING.md) for branch, pull request, and review requirements. The workflow definitions are [GitHub Actions Quality](../.github/workflows/quality.yml), [API Pages](../.github/workflows/pages.yml), and [CircleCI](../.circleci/config.yml).
+
+## CircleCI fork pull request check
+
+The GitHub OAuth pipeline builds fork pull requests when **Build forked pull requests** is enabled in CircleCI project Advanced settings. Its `public_quality` job checks out the commit with a repository-specific read-only deploy key and runs the text and public API documentation checks. It does not pull Unreal Engine, compile the plugin, or use a restricted context. Keep **Pass secrets to builds from forked pull requests** disabled. Contributors do not need a CircleCI project or project credentials.
+
+The OAuth pipeline reports job status to GitHub. Select the actual status shown on a real fork pull request as a required check for `main`; do not use the GitHub App build status as a required PR check, because GitHub App pipelines do not trigger for fork pull requests. If no OAuth status appears, check the OAuth trigger, fork-build setting, GitHub webhook, and checkout access before editing branch protection.
 
 ## CircleCI Linux plugin build
 
@@ -22,6 +28,6 @@ The project supports UE 5.6 and later, but this job currently tests only UE 5.6.
 
 ## Credentials and troubleshooting
 
-The CircleCI project stores `GHCR_USERNAME` and `GHCR_TOKEN` as environment variables. `GHCR_USERNAME` is the GitHub account allowed to pull Epic's engine image; `GHCR_TOKEN` is a classic personal access token with only `read:packages`. Keep the token out of the repository, pull requests, and logs. Replace it in CircleCI if it expires or is revoked.
+The CircleCI project stores `GHCR_USERNAME` and `GHCR_TOKEN` as environment variables. `GHCR_USERNAME` is the GitHub account allowed to pull Epic's engine image; `GHCR_TOKEN` is a classic personal access token with only `read:packages`. Keep the token out of the repository, pull requests, and logs. Fork builds must never receive these variables. Replace the token in CircleCI if it expires or is revoked.
 
 Find build results in the [CircleCI project](https://app.circleci.com/pipelines/github/Nelaric/nelaric-unreal-server). For a manual run, select the GitHub App pipeline and choose `main` for both configuration and checkout sources. If the image pull fails, check GHCR access and the two project environment variables. If compilation fails, inspect the `Compile and package NelaricServer for Linux` step and reproduce with the same engine version.

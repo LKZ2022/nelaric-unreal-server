@@ -7,10 +7,16 @@
 ## 从改动到 `main`
 
 1. 在分支或 Fork 中完成聚焦的改动，并运行相关的[本地检查](CodingStandards/BuildAndReview.zh-CN.md#本地检查)。
-2. 向 `main` 发起 PR。GitHub Actions 的 **Quality** 工作流会检查 PR 与提交命名、格式与文本规范，以及 API 文档。合并前必须通过这些检查并完成审查。
-3. 改动进入 `main` 后，GitHub Actions 再次运行格式与 API 文档检查，**API Pages** 工作流发布文档网站，CircleCI 则编译 Linux 插件。CircleCI 编译发生在合并后，不是 PR 的必需检查。
+2. 向 `main` 发起 PR。GitHub Actions 的 **Quality** 工作流会检查 PR 与提交命名、格式与文本规范，以及 API 文档。CircleCI 的 GitHub OAuth 流水线会对 Fork PR 运行不使用密钥的 `public_quality` 作业。合并前必须通过这些检查并完成审查。
+3. 改动进入 `main` 后，GitHub Actions 再次运行格式与 API 文档检查，**API Pages** 工作流发布文档网站；另一条 CircleCI GitHub App 流水线编译 Linux 插件。Unreal 编译发生在合并后，不是 PR 的必需检查。
 
 分支、PR 和审查要求见[贡献指南](../CONTRIBUTING.zh-CN.md)。工作流配置分别位于 [GitHub Actions Quality](../.github/workflows/quality.yml)、[API Pages](../.github/workflows/pages.yml) 和 [CircleCI](../.circleci/config.yml)。
+
+## CircleCI Fork PR 检查
+
+在 CircleCI 项目的 Advanced 设置中启用 **Build forked pull requests** 后，GitHub OAuth 流水线会构建 Fork PR。`public_quality` 作业使用仅限本仓库的只读 Deploy Key 检出提交，检查文本规范和公开 API 文档；它不拉取 Unreal Engine、不编译插件，也不使用受限 context。**Pass secrets to builds from forked pull requests** 必须保持关闭。贡献者不需要创建 CircleCI 项目或获取项目凭据。
+
+OAuth 流水线会向 GitHub 报告作业状态。应以真实 Fork PR 上显示的状态名称为准，将其设为针对 `main` 的必需检查；GitHub App 流水线不会由 Fork PR 触发，因此不应把其编译状态设为必需 PR 检查。如果 OAuth 状态没有出现，先检查 OAuth 触发器、Fork 构建开关、GitHub webhook 和检出权限，再修改分支保护。
 
 ## CircleCI Linux 插件编译
 
@@ -22,6 +28,6 @@ CircleCI 的 GitHub App 触发器和工作流都只针对 `main` 推送。`build
 
 ## 凭据与故障排查
 
-CircleCI 项目通过环境变量保存 `GHCR_USERNAME` 和 `GHCR_TOKEN`。`GHCR_USERNAME` 是有权拉取 Epic 引擎镜像的 GitHub 账号；`GHCR_TOKEN` 是仅授予 `read:packages` 权限的 classic 个人访问令牌。不要把令牌写入仓库、PR 或日志；令牌过期或被撤销后，应在 CircleCI 中替换。
+CircleCI 项目通过环境变量保存 `GHCR_USERNAME` 和 `GHCR_TOKEN`。`GHCR_USERNAME` 是有权拉取 Epic 引擎镜像的 GitHub 账号；`GHCR_TOKEN` 是仅授予 `read:packages` 权限的 classic 个人访问令牌。不要把令牌写入仓库、PR 或日志；Fork 构建不得收到这些变量。令牌过期或被撤销后，应在 CircleCI 中替换。
 
 在 [CircleCI 项目页面](https://app.circleci.com/pipelines/github/Nelaric/nelaric-unreal-server)查看构建结果。手动运行时，选择 GitHub App 流水线，并将配置来源与代码检出来源都设为 `main`。如果拉取镜像失败，检查 GHCR 访问权限与这两个项目环境变量；如果编译失败，检查 `Compile and package NelaricServer for Linux` 步骤，并使用相同引擎版本复现。
