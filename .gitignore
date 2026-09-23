@@ -1,0 +1,6 @@
+# Generated API documentation and local tooling outputs
+/build/
+/.tools/
+/.csharpier/
+__pycache__/
+*.pyc
